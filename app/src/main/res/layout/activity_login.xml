@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#0F2744"
+    android:padding="24dp">
+
+    <TextView
+        android:id="@+id/textViewTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Log in"
+        android:textSize="26sp"
+        android:textStyle="bold"
+        android:textColor="#FFFFFF"
+        android:layout_marginTop="60dp" />
+
+    <EditText
+        android:id="@+id/editTextUsername"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Login"
+        android:textColorHint="#B0BEC5"
+        android:backgroundTint="#3B5167"
+        android:layout_marginTop="40dp"
+        android:padding="12dp"
+        android:textColor="#FFFFFF" />
+
+    <EditText
+        android:id="@+id/editTextPassword"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Password"
+        android:inputType="textPassword"
+        android:textColorHint="#B0BEC5"
+        android:backgroundTint="#3B5167"
+        android:layout_marginTop="20dp"
+        android:padding="12dp"
+        android:textColor="#FFFFFF" />
+
+    <Button
+        android:id="@+id/buttonLogin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Log in"
+        android:layout_marginTop="24dp"
+        android:textAllCaps="false"
+        android:backgroundTint="#448AFF"
+        android:textColor="#FFFFFF" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Sign in with or proceed"
+        android:textColor="#FFFFFF"
+        android:layout_marginTop="32dp"
+        android:layout_gravity="center" />
+
+    <Button
+        android:id="@+id/buttonGoogleSignIn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Sign in with Google"
+        android:layout_marginTop="16dp"
+        android:textAllCaps="false"
+        android:backgroundTint="#37474F"
+        android:textColor="#FFFFFF" />
+
+    <TextView
+        android:id="@+id/textViewRegister"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Don't have an account? Sign up"
+        android:textColor="#FFFFFF"
+        android:layout_marginTop="32dp"
+        android:layout_gravity="center" />
+
+</LinearLayout>
