@@ -37,7 +37,7 @@ class RegisterActivity : AppCompatActivity() {
                         db.userDao().insertUser(User(username = username, email = email, password = password))
                         runOnUiThread {
                             Toast.makeText(this@RegisterActivity, "Registration successful", Toast.LENGTH_SHORT).show()
-                            startActivity(Intent(this@RegisterActivity, LoginActivity::class.java))
+                            startActivity(Intent(this@RegisterActivity, MainActivity::class.java))
                             finish()
                         }
                     } else {
