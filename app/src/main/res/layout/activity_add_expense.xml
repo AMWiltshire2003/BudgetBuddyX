@@ -38,7 +38,7 @@
             android:layout_height="wrap_content"
             android:text="Select Start Time"
             android:layout_marginTop="12dp"
-            android:backgroundTint="#0C2A4D"/>
+            android:backgroundTint="#112a4d"/>
 
         <Button
             android:id="@+id/btnEndTime"
@@ -46,7 +46,7 @@
             android:layout_height="wrap_content"
             android:text="Select End Time"
             android:layout_marginTop="8dp"
-            android:backgroundTint="#0C2A4D"/>
+            android:backgroundTint="#112a4d"/>
 
         <ImageView
             android:id="@+id/ivPhoto"
@@ -62,7 +62,7 @@
             android:layout_height="wrap_content"
             android:text="Add Photo"
             android:layout_marginTop="8dp"
-            android:backgroundTint="#0C2A4D"/>
+            android:backgroundTint="#112a4d"/>
 
         <Button
             android:id="@+id/btnSaveExpense"
@@ -70,7 +70,7 @@
             android:layout_height="wrap_content"
             android:text="Save Expense"
             android:layout_marginTop="16dp"
-            android:backgroundTint="@android:color/holo_green_dark"
+            android:backgroundTint="#4accc3"
             android:textColor="@android:color/white" />
 
     </LinearLayout>

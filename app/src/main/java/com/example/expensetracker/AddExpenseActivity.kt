@@ -1,19 +1,27 @@
 package com.example.expensetracker
 
-import android.app.*
+import android.app.DatePickerDialog
+import android.app.TimePickerDialog
 import android.content.Intent
-import android.graphics.Bitmap
 import android.os.Bundle
 import android.provider.MediaStore
-import android.widget.*
-import androidx.appcompat.app.AppCompatActivity
+import android.widget.Button
+import android.widget.EditText
+import android.widget.ImageView
+import android.widget.TextView
+import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import com.example.expensetracker.data.Expense
 import com.example.expensetracker.data.ExpenseViewModel
+import com.example.expensetracker.util.AppSettings
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import java.text.SimpleDateFormat
-import java.util.*
+import java.util.Calendar
+import java.util.Date
+import java.util.Locale
 
-class AddExpenseActivity : AppCompatActivity() {
+class AddExpenseActivity : BaseActivity() {
 
     private lateinit var expenseViewModel: ExpenseViewModel
     private lateinit var tvCategory: TextView
@@ -80,7 +88,9 @@ class AddExpenseActivity : AppCompatActivity() {
                     photoUri = ivPhoto?.toString()
                 )
                 expenseViewModel.insert(expense)
-                Toast.makeText(this, "Expense saved!", Toast.LENGTH_SHORT).show()
+                val symbol = AppSettings.getCurrencySymbol(this)
+                Toast.makeText(this, "$symbol ${etAmount.text} saved!", Toast.LENGTH_SHORT).show()
+                checkForBadge()
                 finish()
             }
 
@@ -104,4 +114,24 @@ class AddExpenseActivity : AppCompatActivity() {
             ivPhoto.setImageURI(imageUri)
         }
     }
+
+    private fun checkForBadge() {
+        val db = com.example.expensetracker.data.AppDatabase.getInstance(this)
+        kotlinx.coroutines.CoroutineScope(kotlinx.coroutines.Dispatchers.IO).launch {
+            val count = db.expenseDao().getExpensesCountToday()
+            if (count == 1) { // First expense of the day
+                db.badgeDao().insertBadge(
+                    com.example.expensetracker.data.Badge(
+                        name = "First Expense!",
+                        description = "Logged your first expense today!",
+                        earnedDate = System.currentTimeMillis()
+                    )
+                )
+                withContext(kotlinx.coroutines.Dispatchers.Main) {
+                    Toast.makeText(this@AddExpenseActivity, "🏅 You earned a new badge!", Toast.LENGTH_SHORT).show()
+                }
+            }
+        }
+    }
+
 }

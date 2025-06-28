@@ -16,6 +16,12 @@
         android:theme="@style/Theme.ExpenseTracker"
         tools:targetApi="31">
         <activity
+            android:name=".BudgetGraphActivity"
+            android:exported="false" />
+        <activity
+            android:name=".GamificationActivity"
+            android:exported="false" />
+        <activity
             android:name=".MainActivity"
             android:exported="false" />
         <activity
