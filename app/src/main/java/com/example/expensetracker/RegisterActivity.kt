@@ -4,9 +4,9 @@ import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.example.expensetracker.data.AppDatabase
+import com.example.expensetracker.data.User
 import com.example.expensetracker.databinding.ActivityRegisterBinding
-import com.yourapp.expensetracker.data.AppDatabase
-import com.yourapp.expensetracker.data.User
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -42,8 +42,15 @@ class RegisterActivity : AppCompatActivity() {
                         }
                     } else {
                         runOnUiThread {
-                            Toast.makeText(this@RegisterActivity, "Email already exists", Toast.LENGTH_SHORT).show()
+                            // Save the session
+                            val sharedPref = getSharedPreferences("user_session", MODE_PRIVATE)
+                            sharedPref.edit().putString("logged_in_user", email).apply()
+
+                            Toast.makeText(this@RegisterActivity, "Registration successful", Toast.LENGTH_SHORT).show()
+                            startActivity(Intent(this@RegisterActivity, MainActivity::class.java))
+                            finish()
                         }
+
                     }
                 }
             }

@@ -2,16 +2,15 @@ package com.example.expensetracker
 
 import android.annotation.SuppressLint
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
-import androidx.room.Room
-import com.yourapp.expensetracker.data.AppDatabase
-import com.yourapp.expensetracker.data.UserDao
+import com.example.expensetracker.data.AppDatabase
+import com.example.expensetracker.data.UserDao
 import kotlinx.coroutines.launch
 
 class LoginActivity : AppCompatActivity() {
@@ -21,13 +20,10 @@ class LoginActivity : AppCompatActivity() {
     @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         setContentView(R.layout.activity_login)
 
-        val db = Room.databaseBuilder(
-            applicationContext,
-            AppDatabase::class.java, "budget_buddy_db"
-        ).allowMainThreadQueries().build()
-
+        val db = AppDatabase.getInstance(this)
         userDao = db.userDao()
 
         val loginButton: Button = findViewById(R.id.buttonLogin)
@@ -41,10 +37,13 @@ class LoginActivity : AppCompatActivity() {
             lifecycleScope.launch {
                 val user = userDao.login(username, password)
                 if (user != null) {
-                    // Login successful, navigate to main/dashboard
+                    val sharedPref = getSharedPreferences("user_session", MODE_PRIVATE)
+                    sharedPref.edit().putString("logged_in_user", username).apply()
+
                     startActivity(Intent(this@LoginActivity, MainActivity::class.java))
-                    finish() // Optional: prevent going back to login on back press
-                } else {
+                    finish()
+                }
+                else {
                     Toast.makeText(this@LoginActivity, "Invalid credentials", Toast.LENGTH_SHORT)
                         .show()
                 }
